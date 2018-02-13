@@ -1,10 +1,28 @@
+:root {
+  --black: #1A1A1A;
+}
+
+@font-face {
+  font-family: "Nue Haas Grotrek";
+  src: url("/font/058e449e-6b71-4b05-9a5b-9a951d40efa6.woff2"), format("woff2"),
+       url("/font/518b22b9-0894-4b42-9c6f-fd0a5fcaa8f0.eot"), format("eot"),
+       url("/font/7355d21e-8f3a-4515-a797-1e605d410a1a.ttf"), format("ttf"),
+       url("/font/d32982a5-a70a-4fd5-af56-7ab60b665ca3.woff"), format("woff")
+}
+
+.eaude-logo {
+  color: '#fffff';
+  width: 98%;
+}
+
 html, body
 {
-  background-color: #fff;
-  color: #000;
+  background-color: '#fffff';
+  color: var(--black);
   letter-spacing: 0.5px;
   font-family: "Source Sans Pro", Arial, sans-serif;
-  height: 100vh;
+  min-height: 100vh;
+  height: auto;
   margin: 0;
 }
 
@@ -15,10 +33,10 @@ footer
   border-top: 1px solid #ddd;
 }
 
-a, a:hover, a:focus, a:visited
+/* a, a:hover, a:focus, a:visited
 {
   color: #000;
-}
+} */
 
 .logo {
   width: 100%;

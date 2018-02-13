@@ -1,48 +1,49 @@
 <template>
   <section class="container">
-    <img src="~assets/img/logo.png" alt="Nuxt.js Logo" class="logo" />
-    <h1 class="title">
-      USERS
-    </h1>
-    <ul class="users">
-      <li v-for="(user, index) in users" :key="index" class="user">
-        <nuxt-link :to="{ name: 'id', params: { id: index }}">
-          {{ user.name }}
-        </nuxt-link>
-      </li>
-    </ul>
+    <nuxt-link class='logo-link' to='/contact'>
+      <logo />
+    </nuxt-link>
+    <video class='flexible' autoplay="" loop='' name="media">
+       <source src="http://res.cloudinary.com/db3k25xjz/video/upload/v1518374592/eaude_web_video_sb36xg.mp4" type="video/mp4">
+    </video>
   </section>
 </template>
 
 <script>
-import axios from '~/plugins/axios'
+// import axios from '~/plugins/axios'
+import logo from '../components/logo'
 
 export default {
-  async asyncData () {
-    let { data } = await axios.get('/api/posts')
-    return { users: data }
+  components: {
+    logo
   },
   head () {
     return {
-      title: 'Users'
+      title: 'Eaude'
     }
   }
 }
 </script>
 
 <style scoped>
-.title
-{
-  margin: 30px 0;
-}
-.users
-{
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-.user
-{
-  margin: 10px 0;
-}
+  .flexible {
+    position:absolute;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+
+  .logo-link {
+    width: 100vw;
+  }
+
+  .container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 </style>
+
+
