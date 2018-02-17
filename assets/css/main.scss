@@ -1,0 +1,34 @@
+@import 'fonts';
+
+:root {
+  --black: #1A1A1A;
+}
+
+html, body
+{
+  background-color: '#fffff';
+  color: var(--black);
+  letter-spacing: 0.5px;
+  font-family: "Source Sans Pro", Arial, sans-serif;
+  min-height: 100vh;
+  height: auto;
+  margin: 0;
+}
+
+a:visited, a {
+  color: var(--black);
+}
+
+.eaude-logo {
+  color: '#fffff';
+  width: 98%;
+}
+
+.logo {
+  width: 100%;
+  height: auto;
+  max-width: 400px;
+  max-height: 289px;
+}
+
+

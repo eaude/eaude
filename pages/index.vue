@@ -1,9 +1,9 @@
 <template>
   <section class="container">
-    <nuxt-link class='logo-link' to='/contact'>
+    <nuxt-link class='logo-link' to='/about'>
       <logo />
     </nuxt-link>
-    <video class='flexible' autoplay="" loop='' name="media">
+    <video autoplay="" loop='' name="media">
        <source src="http://res.cloudinary.com/db3k25xjz/video/upload/v1518374592/eaude_web_video_sb36xg.mp4" type="video/mp4">
     </video>
   </section>
@@ -26,7 +26,11 @@ export default {
 </script>
 
 <style scoped>
-  .flexible {
+  .container {
+    height: 100vh;
+  }
+
+  video {
     position:absolute;
     object-fit: cover;
     width: 100%;

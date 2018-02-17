@@ -1,0 +1,80 @@
+$break-small: 320px;
+$break-medium: 820px;
+$break-large: 1230px;
+$break-extra-large: 1440px;
+$font-family: 'Neue Haas Grotesk Roman';
+
+@font-face {
+  font-family: "Neue Haas Grotesk Roman";
+  src: url("~/assets/font/058e449e-6b71-4b05-9a5b-9a951d40efa6.woff2") format("woff2"),
+       url("~/assets/font/518b22b9-0894-4b42-9c6f-fd0a5fcaa8f0.eot") format("eot"),
+       url("~/assets/font/7355d21e-8f3a-4515-a797-1e605d410a1a.ttf") format("ttf"),
+       url("~/assets/font/d32982a5-a70a-4fd5-af56-7ab60b665ca3.woff") format("woff")
+}
+
+@mixin responiveFont {
+  @media screen and (max-width: $break-medium) {
+    &-s {
+      @content;
+    }
+  }
+  @media screen and (max-width: $break-large - 1) {
+    &-m {
+      @content;
+    }
+  }
+  @media screen and (max-width: $break-extra-large - 1) {
+    &-l {
+      @content;
+    }
+  }
+  @media screen and (min-width: $break-extra-large) {
+    &-xl {
+      @content;
+    }
+  }
+}
+
+.p1 {
+  @include responiveFont { 
+    font-family: $font-family;  
+    font-size: 20px ;
+    letter-spacing: 0.23px; 
+    line-height: 24px; 
+  }
+}
+
+.p2 {
+  @include responiveFont { 
+    font-family: $font-family; 
+    font-size: 16px;
+    letter-spacing: 0.26px;
+    line-height: 19px;
+  }
+}
+
+.p3 {
+  @include responiveFont {
+    font-family: $font-family; 
+    font-size: 14px;
+    letter-spacing: .26px;
+    line-height: 17px;
+  }
+}
+
+// .p3, .p4 {
+//   text-transform: uppercase;
+// }
+
+// .p3 {
+//   font-size: 12px;
+//   letter-spacing: .14px;
+//   line-height: 14px;
+//   text-transform: uppercase;
+// }
+
+// .p4 {
+//   font-size: 10px;
+//   letter-spacing: .11px;
+//   line-height: 12px;
+// }
