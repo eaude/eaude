@@ -25,7 +25,14 @@ a:visited, a {
 
 .eaude-logo {
   color: var(--white);
-  width: 98%;
+  width: 95%;
+}
+
+.logo-link {
+  display: flex;
+  height: 100vh;
+  align-content: center;
+  justify-content: center;
 }
 
 .logo {
