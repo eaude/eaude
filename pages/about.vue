@@ -1,10 +1,5 @@
 <template>
   <base-layout>
-    <nav-component slot='header'>
-      <router-link class='p1-xl p2-l p3-s' to='/about'>About</router-link>
-      <router-link class='p1-xl p2-l p3-s' to='/blog'>Blog</router-link>
-      <router-link class='p1-xl p2-l p3-s' to='/shop'>Shop</router-link>
-    </nav-component>
     <aside-component slot='header'>
       {{ about }}
     </aside-component>
@@ -16,7 +11,6 @@
 <script>
 import baseLayout from '../components/layout/baseLayout.vue'
 import timerComponent from '../components/timerComponent.vue'
-import navComponent from '../components/header/navComponent.vue'
 import asideComponent from '../components/header/asideComponent.vue'
 import footerComponent from '../components/footer/footerComponent.vue'
 
@@ -25,8 +19,7 @@ export default {
     baseLayout,
     timerComponent,
     footerComponent,
-    asideComponent,
-    navComponent
+    asideComponent
   },
   data () {
     return {

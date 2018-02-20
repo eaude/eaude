@@ -21,6 +21,8 @@ module.exports = {
   /*
   ** Add axios globally
   */
+  plugins: ['~/plugins/vue-progressive-load/index.js'],
+  
   build: {
     vendor: ['axios'],
     /*

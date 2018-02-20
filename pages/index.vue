@@ -17,6 +17,7 @@ export default {
   components: {
     logo
   },
+  transition: 'fade--slow',
   head () {
     return {
       title: 'Eaude'

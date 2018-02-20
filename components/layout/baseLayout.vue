@@ -1,6 +1,11 @@
 <template>
   <div class="container">
     <header>
+      <nav-component slot='header'>
+        <router-link class='p1-xl p2-l p3-s' to='/about'>About</router-link>
+        <router-link class='p1-xl p2-l p3-s' to='/blog'>Blog</router-link>
+        <router-link class='p1-xl p2-l p3-s' to='/shop'>Shop</router-link>
+      </nav-component>
       <slot name='header'></slot>
     </header>
     <main>
@@ -11,13 +16,20 @@
 </template>
 
 <script>
+import navComponent from '../header/navComponent.vue'
+
 export default {
-  name: 'baseLayout'
+  name: 'baseLayout',
+  components: {
+    navComponent
+  },
+  props: {
+
+  }
 }
 </script>
 
 <style scoped>
-
   .container {
     padding: 20px;
     width: 100%;
@@ -27,7 +39,7 @@ export default {
     flex-direction: column;
     position: relative;
   }
-
+  
   header {
     display: flex;
     flex-flow: row wrap;
@@ -39,10 +51,7 @@ export default {
 
   main {
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex: 0;
-    display: flex;
   }
 
   footer {
