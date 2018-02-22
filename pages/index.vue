@@ -59,7 +59,6 @@ export default {
   .logo-link {
     width: 100vw;
     z-index: 1;
-    position: absolute;
   }
 
   .background-img {
