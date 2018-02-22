@@ -59,8 +59,8 @@ export default {
         .then(({data: { posts }}) => {
           this.posts = [...this.posts, ...posts]
         })
-        .catch((e) => {
-          console.log(e)
+        .catch((err) => {
+          console.log(err)
         })
     },
     observeLastChild () {
@@ -89,7 +89,7 @@ export default {
     })
   },
   beforeDestroy () {
-    clearInterval(this.ticker)
+    this.observer.disconnect()
   }
 }
 </script>
