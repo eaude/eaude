@@ -18,7 +18,7 @@ export default {
   name: 'blog',
   asyncData ({ params, error }) {
     return axios.get('/api/posts/')
-      .then(({data: { posts }}) => ({ posts }))
+      .then(({data: { posts, total_posts: totalPosts }}) => ({ posts, totalPosts }))
       .catch((e) => {
         if (error) {
           error({ statusCode: 404, message: 'Posts Not Recieved' })
@@ -42,7 +42,8 @@ export default {
     }
   },
   methods: {
-    createObserver (el, cb) {
+    initObserver (cb) {
+      require('intersection-observer')
       this.observer = new IntersectionObserver((entries) => {
         if (entries[0].intersectionRatio) {
           cb()
@@ -50,9 +51,8 @@ export default {
         }
       }, {
         rootMargin: '0px',
-        threshold: [0.7, 1.0]
+        threshold: [0.5, 1.0]
       })
-      this.observer.observe(el)
     },
     loadMorePosts () {
       return axios.get(`/api/posts?offset=${this.posts.length}`)
@@ -62,23 +62,30 @@ export default {
         .catch((e) => {
           console.log(e)
         })
+    },
+    observeLastChild () {
+      try {
+        const children = this.$refs.wrapper.$el.children
+        const el = Array.from(children)[(children.length - 1)]
+        this.observer.observe(el)
+      } catch (err) {
+        console.error(err)
+      }
     }
   },
   watch: {
     posts (a, b) {
-      if (a > b) {
+      if (a.length < this.totalPosts) {
         this.$nextTick(() => {
-          const el = Array.from(this.$refs.wrapper.$el.children).pop()
-          this.createObserver(el, this.loadMorePosts)
+          this.observeLastChild()
         })
       }
     }
   },
   mounted () {
     this.$nextTick(() => {
-      require('intersection-observer')
-      const el = Array.from(this.$refs.wrapper.$el.children).pop()
-      this.createObserver(el, this.loadMorePosts)
+      this.initObserver(this.loadMorePosts)
+      this.observeLastChild()
     })
   },
   beforeDestroy () {
