@@ -30,6 +30,11 @@ export default {
       title: `Eaude Posts`
     }
   },
+  components: {
+    baseLayout,
+    blogPost,
+    blogPosts
+  },
   data () {
     return {
       observer: '',
@@ -62,21 +67,22 @@ export default {
   watch: {
     posts (a, b) {
       if (a > b) {
-        const el = Array.from(this.$refs.wrapper.$el.children).pop()
-        this.createObserver(el, this.loadMorePosts)
+        this.$nextTick(() => {
+          const el = Array.from(this.$refs.wrapper.$el.children).pop()
+          this.createObserver(el, this.loadMorePosts)
+        })
       }
     }
   },
   mounted () {
     this.$nextTick(() => {
+      require('intersection-observer')
       const el = Array.from(this.$refs.wrapper.$el.children).pop()
       this.createObserver(el, this.loadMorePosts)
     })
   },
-  components: {
-    baseLayout,
-    blogPost,
-    blogPosts
+  beforeDestroy () {
+    clearInterval(this.ticker)
   }
 }
 </script>
