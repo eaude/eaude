@@ -1,22 +1,14 @@
 <template>
   <div class='item' v-if='originalPost'>
-    <template v-if='int < 5'>
+    <template>
       <div class="background-image"
           :style="`--background: url(${altSize[3]});`">
       </div>
-      <picture :style="`--span: ${span}; --start: ${span === 6 ? 4 : 5};`">
+      <picture :style="`--span: ${span}; --start: ${isTall ? 5 : 4 };`">
         <source media="(min-width: 1440px)" :srcset="altSize[1]">
         <source media="(min-width: 650px)" :srcset="altSize[2]">
         <img :src="altSize[2]">
       </picture>
-    </template>
-    <template v-else>
-      <picture :style="`--span: ${span}; --start: ${span === 6 ? 4 : 5};`">
-        <progressive-img :src="altSize[2]" /> 
-      </picture>
-      <div class='background-image'>
-        <progressive-background :src="altSize[3]" />
-      </div>
     </template>
     <p class='caption'>
       {{ caption }}
@@ -25,7 +17,6 @@
 </template>
 
 <script>
-
 export default {
   props: ['post', 'int'],
   computed: {
@@ -38,11 +29,11 @@ export default {
     altSize () {
       return this.post.altPhotos
     },
+    isTall () {
+      return Number(this.originalPost.height) > Number(this.originalPost.width)
+    },
     span () {
-      if (this.originalPost.height > this.originalPost.width) {
-        return 4
-      }
-      return 6
+      return this.isTall ? 4 : 6
     }
   }
 }
@@ -95,7 +86,8 @@ export default {
 
   .background-image {
     --background: '';
-    filter: blur(50px);
+    filter: blur(10px);
+    will-change: scroll-position;
     background-image: var(--background);
     background-size: cover;
     position: absolute;
