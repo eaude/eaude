@@ -18,7 +18,9 @@ export default {
   name: 'blog',
   asyncData ({ params, error }) {
     return axios.get('/api/posts/')
-      .then(({data: { posts, total_posts: totalPosts }}) => ({ posts, totalPosts }))
+      .then(({ data: { posts, count } }) => {
+        return { posts, count }
+      })
       .catch((e) => {
         if (error) {
           error({ statusCode: 404, message: 'Posts Not Recieved' })
@@ -56,7 +58,7 @@ export default {
     },
     loadMorePosts () {
       return axios.get(`/api/posts?offset=${this.posts.length}`)
-        .then(({data: { posts }}) => {
+        .then(({ data: { posts } }) => {
           this.posts = [...this.posts, ...posts]
         })
         .catch((err) => {
@@ -67,7 +69,9 @@ export default {
       try {
         const children = this.$refs.wrapper.$el.children
         const el = Array.from(children)[(children.length - 1)]
-        this.observer.observe(el)
+        if (el) {
+          this.observer.observe(el)
+        }
       } catch (err) {
         console.error(err)
       }
@@ -75,7 +79,7 @@ export default {
   },
   watch: {
     posts (a, b) {
-      if (a.length < this.totalPosts) {
+      if (a.length < this.count) {
         this.$nextTick(() => {
           this.observeLastChild()
         })

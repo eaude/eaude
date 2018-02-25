@@ -18,6 +18,7 @@
     "express": "^4.15.3",
     "intersection-observer": "^0.5.0",
     "nuxt": "^1.0.0-rc11",
+    "redis": "^2.8.0",
     "sass-loader": "^6.0.6",
     "source-map-support": "^0.4.15",
     "svg-sprite-loader": "^3.6.2",

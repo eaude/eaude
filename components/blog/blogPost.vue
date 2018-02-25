@@ -1,21 +1,21 @@
 <template>
-  <div class='item' v-if='originalSize'>
+  <div class='item' v-if='originalPost'>
     <template v-if='int < 5'>
       <div class="background-image"
-          :style="`--background: url(${altSize[3].url});`">
+          :style="`--background: url(${altSize[3]});`">
       </div>
       <picture :style="`--span: ${span}; --start: ${span === 6 ? 4 : 5};`">
-        <source media="(min-width: 1440px)" :srcset="altSize[1].url">
-        <source media="(min-width: 650px)" :srcset="altSize[2].url">
-        <img :src="altSize[2].url">
+        <source media="(min-width: 1440px)" :srcset="altSize[1]">
+        <source media="(min-width: 650px)" :srcset="altSize[2]">
+        <img :src="altSize[2]">
       </picture>
     </template>
     <template v-else>
       <picture :style="`--span: ${span}; --start: ${span === 6 ? 4 : 5};`">
-        <progressive-img :src="altSize[2].url" /> 
+        <progressive-img :src="altSize[2]" /> 
       </picture>
       <div class='background-image'>
-        <progressive-background :src="altSize[3].url" />
+        <progressive-background :src="altSize[3]" />
       </div>
     </template>
     <p class='caption'>
@@ -29,22 +29,17 @@
 export default {
   props: ['post', 'int'],
   computed: {
-    photos () {
-      return this.post &&
-             this.post.photos &&
-             this.post.photos[0]
+    originalPost () {
+      return this.post.originalPost
     },
     caption () {
-      return this.post.caption.replace(/<[^>]+>/g, '')
+      return this.originalPost.caption.replace(/<[^>]+>/g, '')
     },
     altSize () {
-      return this.photos.alt_sizes
-    },
-    originalSize () {
-      return this.photos.original_size
+      return this.post.altPhotos
     },
     span () {
-      if (this.originalSize.height > this.originalSize.width) {
+      if (this.originalPost.height > this.originalPost.width) {
         return 4
       }
       return 6

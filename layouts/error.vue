@@ -19,6 +19,12 @@ export default {
 </script>
 
 <style scoped>
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .title
 {
   margin-top: 15px;
