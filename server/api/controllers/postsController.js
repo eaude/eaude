@@ -1,17 +1,13 @@
-import { Router } from 'express'
-
 import { 
   hydratePostCache, 
   checkPostCache, 
   buildPostsFromCache,
   getPostCountFromCache
-} from './cache'
+} from '../services/cache'
 
-import { getTumblrPosts } from './services/tumblr'
+import { getTumblrPosts } from '../services/tumblr'
 
-const router = Router()
-
-router.get('/posts', async function (req, res, next) {
+export const getPosts = async (req, res, next) => {
   try {
     const offset = req.query.offset || 0;
     const postKeys = Array.from(Array(5))
@@ -33,6 +29,4 @@ router.get('/posts', async function (req, res, next) {
   } catch (err) {
     console.error(err)
   }
-})
-
-export default router
+}

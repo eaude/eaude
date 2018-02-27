@@ -43,7 +43,8 @@ a:visited, a {
 }
 
 .page-enter-active, .page-leave-active {
-   transition: opacity 0.75s
+   transition: opacity 0.50s;
+   transition-timing-function: linear;
 }
 
 .page-enter, .page-leave-active {

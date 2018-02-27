@@ -74,6 +74,7 @@ export const hydratePostCache = (blog, offset) => {
       })
 
       client.zadd('posts', current, postKey)
+      // TODO: set expirety date here to refresh the cache
       client.set('posts:count', blog.total_posts)
     })
     resolve(true)
