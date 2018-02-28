@@ -86,8 +86,9 @@ export default {
 
   .background-image {
     --background: '';
-    filter: blur(10px);
-    will-change: scroll-position;
+    filter: blur(40px);
+    transform: translate3d(0, 0, 0);
+    will-change: transform;
     background-image: var(--background);
     background-size: cover;
     position: absolute;
