@@ -31,7 +31,7 @@ export default {
 
 <style scoped>
   .container {
-    padding: 20px;
+    padding: 15px;
     width: 100%;
     box-sizing: border-box;
     min-height: 100vh;
@@ -43,9 +43,12 @@ export default {
   header {
     display: flex;
     flex-flow: row wrap;
+    margin-top: -2px;
+    max-width: 100vw;
   }
 
-  header aside, header nav {
+  header aside, 
+  header nav {
     margin-bottom: 40px;
   }
 
@@ -57,6 +60,13 @@ export default {
   footer {
     display: flex;
     flex: 1;
+    margin-bottom: -2px;
+  }
+  
+  @media (min-width: 1440px) {
+    .container {
+      padding: 20px;
+    }
   }
 
   @media (min-width: 720px) {
@@ -69,7 +79,7 @@ export default {
     }
 
     header nav {
-      margin-right: 70px;
+      margin-right: 50px;
       display: inline;
     }
   }

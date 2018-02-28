@@ -99,9 +99,34 @@ export default {
 </script>
 
 <style>
+
+  .blog.container main {
+    margin-top: 30px;
+  }
+
+  .blog.container header {
+    position: fixed;
+    background-color: #ffffff;
+    top: 0;
+    left: 0px;
+    width: 100%;
+    z-index: 1000;
+    padding: 15px;
+    box-sizing: border-box;
+  }
   
   .blog.container header nav {
-    margin-bottom: 20px;
+    margin-bottom: 0px;
   }
+
+  @media (min-width: 1440px) {
+    .blog.container header {
+      padding: 18px 20px;
+    }
+    .blog.container main {
+      margin-top: 35px;
+    }
+
+  };
 
 </style>

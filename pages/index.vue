@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import logo from '../components/logo'
+import logo from '../components/logo.vue'
 
 export default {
   components: {
@@ -57,8 +57,20 @@ export default {
   }
 
   .logo-link {
-    width: 100vw;
     z-index: 1;
+    height: auto;
+    width: 85%;
+  }
+
+  @media (min-width: 720px) {
+    .logo-link {
+      width: 90%;
+    }
+  }
+
+  .logo-link svg {
+    height: 100%;
+    width: 100%;
   }
 
   .background-img {

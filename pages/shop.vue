@@ -1,10 +1,8 @@
 <template>
   <base-layout>
-    <aside-component slot='header'>
-      {{ about }}
-    </aside-component>
-    <p slot='main' class='p1-xl p2-l p3-s'> Comming Soon </p>
-    <footer-component slot='footer'/>
+    <div slot='main' class="about-wrapper">
+      <p class='p1-xl p2-l p3-s'> COMMING SOON </p>
+    </div>
   </base-layout>
 </template>
 
@@ -21,37 +19,26 @@ export default {
     footerComponent,
     asideComponent
   },
-  data () {
-    return {
-      windowWidth: 0
-    }
-  },
   head () {
     return {
       title: 'Shop Eaude'
     }
-  },
-  computed: {
-    about () {
-      return 'EAUDE is the studio of Art Directors Chris Glickman and Isaac Friedman-Heiman. The New York based office works with select clients in the fashion and cultural sectors creating campaigns, identities, environments, publications and websites.'
-    }
-  },
-  beforeMount () {
-    this.windowWidth = window.innerWidth
-    window.addEventListener('resize', () => {
-      this.windowWidth = window.innerWidth
-    })
-  },
-  beforeDestroy () {
-    window.removeEventListener('resize', () => {})
   }
 }
 </script>
 
 <style scoped>
-  main p {
-    flex: 1;
-    text-align: center;
-    align-self: center;
+
+  .about-wrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: -1;
   }
+
 </style>

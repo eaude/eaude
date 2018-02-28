@@ -24,7 +24,6 @@ export default {
 
     img {
       width: 270px;
-      margin: 0 auto;
     }
 
      @media(min-width: 720px) { 

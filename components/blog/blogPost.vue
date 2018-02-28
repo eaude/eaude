@@ -1,11 +1,11 @@
 <template>
   <div class='item' v-if='originalPost'>
     <template>
-      <div class="background-image"
+      <div class="background-image" :class="{ 'is-safari': isSafari }"
           :style="`--background: url(${altSize[3]});`">
       </div>
       <picture :style="`--span: ${span}; --start: ${isTall ? 5 : 4 };`">
-        <source media="(min-width: 1440px)" :srcset="altSize[1]">
+        <source media="(min-width: 1440px)" :srcset="altSize[0]">
         <source media="(min-width: 650px)" :srcset="altSize[2]">
         <img :src="altSize[2]">
       </picture>
@@ -19,6 +19,11 @@
 <script>
 export default {
   props: ['post', 'int'],
+  data () {
+    return {
+      isSafari: false
+    }
+  },
   computed: {
     originalPost () {
       return this.post.originalPost
@@ -34,6 +39,14 @@ export default {
     },
     span () {
       return this.isTall ? 4 : 6
+    }
+  },
+  beforeMount () {
+    var ua = navigator.userAgent.toLowerCase()
+    if (ua.indexOf('safari') !== -1) {
+      if (!(ua.indexOf('chrome') > -1)) {
+        this.isSafari = true
+      }
     }
   }
 }
@@ -72,7 +85,7 @@ export default {
 
   .item .caption {
     --white: #ffffff;
-    grid-column:  span 12;
+    grid-column: span 12;
     background-color: var(--white);
     height: 15px;
     margin: 0px;
@@ -84,33 +97,41 @@ export default {
     width: 100%;
   }
 
-  .background-image {
-    --background: '';
-    filter: blur(40px);
+  .is-safari {
     transform: translate3d(0, 0, 0);
     will-change: transform;
+    will-change: filter;
+  }
+
+  .background-image {
+    --background: '';
+    filter: blur(35px);
     background-image: var(--background);
     background-size: cover;
     position: absolute;
-    height: 100%;
-    width: 100%;
+    height: 130%;
+    width: 130%;
+    top: -15%;
+    left: -15%;
     z-index: -1;
+  }
+
+  @media (min-width: 1440px) {
+    .item .caption {
+      height: 20px;
+    }
   }
 
   @media (max-width: 720px) {
     .background-image {
       display: none;
     }
-
-    .item .caption {
-      height: 20px;
-    }
-
+    
     .item picture {
       --span: 12 !important;
       --start: 1 !important;
       margin: 0px;
     }
   }
-
+  
 </style>

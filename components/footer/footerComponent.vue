@@ -2,7 +2,7 @@
   <footer>
       <address class='p1-xl p2-l p3-s'>
         <span>
-          <span>LG</span>
+          <a href='https://www.instagram.com/Eaude.Studio/'>IG</a>
           <span>IRL</span>
         </span>
         <span>
@@ -21,7 +21,9 @@
           </span>
         </span>
       </address>
-      <logo-carousel />
+      <a href="mailto:info@eaude.co">
+        <logo-carousel />
+      </a>
   </footer>
 </template>
 
@@ -67,9 +69,21 @@ export default {
     margin-right: 25px;
   }
 
+  address span a {
+    text-decoration:  none;
+  }
+
   address span span {
     display: flex;
   } 
+
+  footer a {
+    display: flex;
+  }
+
+  footer a img {
+    margin-left: auto;
+  }
 
   .desktop-address {
     display: none;
@@ -94,9 +108,14 @@ export default {
       flex-flow: row nowrap;
     }
 
-    footer img {
+    footer a {
+      display: block; 
+    }
+
+    footer a img {
       margin-right: 10px;
       margin-top: 0px;
+      margin-bottom: 10px;
     }
 
     footer address > span:last-child {
