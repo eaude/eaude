@@ -21,9 +21,11 @@
           </span>
         </span>
       </address>
-      <a href="mailto:info@eaude.co">
-        <logo-carousel />
-      </a>
+      <div class="logo-wrapper">
+        <a href="mailto:info@eaude.co">
+          <logo-carousel />
+        </a>
+      </div>
   </footer>
 </template>
 
@@ -37,11 +39,12 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 
   footer {
     display: flex;
     flex-flow: column;
+    flex: 1;
   }
 
   footer address {
@@ -69,16 +72,17 @@ export default {
     margin-right: 25px;
   }
 
-  address span a {
+  footer address span a {
     text-decoration:  none;
   }
 
-  address span span {
+  footer address span span {
     display: flex;
   } 
 
-  footer a {
+  footer .logo-wrapper {
     display: flex;
+    justify-content: flex-end;
   }
 
   footer a img {

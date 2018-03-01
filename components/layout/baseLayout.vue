@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" :style="`--height: ${height}px`">
     <header>
       <nav-component slot='header'>
         <router-link class='p1-xl p2-l p3-s' to='/about'>About</router-link>
@@ -22,16 +22,28 @@ export default {
   name: 'baseLayout',
   components: {
     navComponent
+  },
+  data () {
+    return {
+      height: ''
+    }
+  },
+  beforeMount () {
+    this.height = window.innerHeight
+    window.addEventListener('resize', () => {
+      this.height = window.innerHeight
+    })
   }
 }
 </script>
 
 <style scoped>
   .container {
+    --height: 100vh;
     padding: 15px;
     width: 100%;
     box-sizing: border-box;
-    min-height: 100vh;
+    min-height: var(--height);
     display: flex;
     flex-direction: column;
     position: relative;
@@ -55,8 +67,6 @@ export default {
   }
 
   footer {
-    display: flex;
-    flex: 1;
     margin-bottom: -2px;
   }
   

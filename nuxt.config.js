@@ -25,6 +25,7 @@ module.exports = {
   
   build: {
     vendor: ['axios'],
+    extractCSS: true,
     /*
     ** Run ESLINT on save
     */
