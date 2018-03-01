@@ -22,9 +22,6 @@ export default {
   name: 'baseLayout',
   components: {
     navComponent
-  },
-  props: {
-
   }
 }
 </script>

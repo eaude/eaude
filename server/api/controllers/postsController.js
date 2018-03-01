@@ -2,7 +2,9 @@ import {
   hydratePostCache, 
   checkPostCache, 
   buildPostsFromCache,
-  getPostCountFromCache
+  getPostCountFromCache,
+  shouldFlush,
+  flushCache
 } from '../services/cache'
 
 import { getTumblrPosts } from '../services/tumblr'
@@ -13,7 +15,13 @@ export const getPosts = async (req, res, next) => {
     const postKeys = Array.from(Array(5))
       .map((x, i) => `post:${offset + i}`)
 
-    let hasCache = await checkPostCache(postKeys)
+    let hasCache = false
+    // if its the first call and ttl has expired then we should flush
+    if (offset === 0 && await shouldFlush(43200)) {
+      await flushCache()
+    } else {
+      hasCache = await checkPostCache(postKeys)
+    }
 
     if (!hasCache) {  
       const blog = await getTumblrPosts(offset)

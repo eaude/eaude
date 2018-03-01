@@ -7,13 +7,12 @@
 <style>
   nav {
     flex: 1;
-    justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     display: flex;
   }
 
   nav a {
-    margin: 0px 10px;
+    margin: 0px 17px 0px 0px;
     text-transform: uppercase;
     text-decoration: none;
   }
@@ -25,11 +24,4 @@
   nav a:last-child {
     margin-right: 0px;
   }
-
-  @media (min-width: 720px) {
-    nav {
-      align-items: flex-start;
-    }
-  }
-
 </style>
