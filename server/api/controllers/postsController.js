@@ -14,10 +14,11 @@ export const getPosts = async (req, res, next) => {
     const offset = req.query.offset || 0;
     const postKeys = Array.from(Array(5))
       .map((x, i) => `post:${offset + i}`)
+    const timeToLive = process.env.cache_ttl || 28800000
 
     let hasCache = false
     // if its the first call and ttl has expired then we should flush
-    if (offset === 0 && await shouldFlush(43200)) {
+    if (offset === 0 && await shouldFlush(timeToLive)) {
       await flushCache()
     } else {
       hasCache = await checkPostCache(postKeys)
