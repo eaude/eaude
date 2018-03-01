@@ -17,20 +17,14 @@ export default {
 
 <style scoped>  
 
-    picture {
-      display: flex;
-      flex: 1;
-    }
-
     img {
+      margin-right: 10px;
+      margin-bottom: 10px;
       width: 270px;
     }
 
      @media(min-width: 720px) { 
-       picture {
-         flex: 0;
-       }
-
+       
        img {
          flex: 0;
          margin-right: 0;

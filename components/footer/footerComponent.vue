@@ -112,11 +112,7 @@ export default {
       flex-flow: row nowrap;
     }
 
-    footer a {
-      display: block; 
-    }
-
-    footer a img {
+    footer .logo-wrapper img {
       margin-right: 10px;
       margin-top: 0px;
       margin-bottom: 10px;
