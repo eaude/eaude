@@ -2,7 +2,7 @@
   <footer>
       <address class='p1-xl p2-l p3-s'>
         <span>
-          <a href='https://www.instagram.com/Eaude.Studio/'>IG</a>
+          <a href='https://www.instagram.com/eaude.studio/'>IG</a>
           <span>IRL</span>
         </span>
         <span>

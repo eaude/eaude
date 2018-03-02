@@ -5,9 +5,9 @@
           :style="`--background: url(${altSize[3]});`">
       </div>
       <picture :style="`--span: ${span}; --start: ${isTall ? 5 : 4 };`">
-        <source media="(min-width: 1440px)" :srcset="altSize[0]">
-        <source media="(min-width: 650px)" :srcset="altSize[2]">
-        <img :src="altSize[2]">
+        <source media="(min-width: 1440px)" :srcset="originalPost.url">
+        <source media="(min-width: 650px)" :srcset="altSize[0]">
+        <img :src="altSize[1]">
       </picture>
     </template>
     <p class='caption'>
@@ -80,7 +80,7 @@ export default {
     --start: 5;
     min-width: 0;
     grid-column: var(--start) / span var(--span); 
-    margin: 100px 0;    
+    margin: 100px 0;  
   }
 
   .item .caption {
@@ -113,6 +113,8 @@ export default {
     width: 130%;
     top: -15%;
     left: -15%;
+    bottom: -15%;
+    right: -15%;
     z-index: -1;
   }
 

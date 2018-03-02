@@ -121,7 +121,7 @@ export default {
 
   @media (min-width: 1440px) {
     .blog.container header {
-      padding: 18px 20px;
+      padding: 18px 20px 16px 20px;
     }
     .blog.container main {
       margin-top: 35px;

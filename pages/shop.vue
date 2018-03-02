@@ -1,7 +1,7 @@
 <template>
   <base-layout>
     <div slot='main' class="about-wrapper">
-      <p class='p1-xl p2-l p3-s'> COMMING SOON </p>
+      <p class='p1-xl p2-l p3-s'> COMING SOON </p>
     </div>
   </base-layout>
 </template>
