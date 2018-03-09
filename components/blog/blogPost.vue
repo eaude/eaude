@@ -1,9 +1,7 @@
 <template>
   <div class='item' v-if='originalPost'>
     <template>
-      <div class="background-image" :class="{ 'is-safari': isSafari }"
-          :style="`--background: url(${altSize[3]});`">
-      </div>
+      <background-image :imageUrl="altSize[3]" />
       <picture :style="`--span: ${span}; --start: ${isTall ? 5 : 4 };`">
         <source media="(min-width: 1440px)" :srcset="originalPost.url">
         <source media="(min-width: 650px)" :srcset="altSize[0]">
@@ -17,12 +15,17 @@
 </template>
 
 <script>
+import backgroundImage from '../backgroundImage.vue'
+
 export default {
   props: ['post', 'int'],
   data () {
     return {
       isSafari: false
     }
+  },
+  components: {
+    backgroundImage
   },
   computed: {
     originalPost () {
@@ -105,10 +108,7 @@ export default {
   }
 
   .background-image {
-    --background: '';
     filter: blur(35px);
-    background-image: var(--background);
-    background-size: cover;
     position: absolute;
     height: 130%;
     width: 130%;

@@ -1,9 +1,9 @@
 <template>
-  <section class="container" :style="`--height: ${height}px`">
-    <video v-if="windowWidth > 650" autoplay="" loop='' name="media">
-       <source src="http://res.cloudinary.com/db3k25xjz/video/upload/v1518374592/eaude_web_video_sb36xg.mp4" type="video/mp4">
+  <section class="container" :style="`--height: ${windowHeight};`">
+    <video autoplay="" loop='' name="media" v-show='windowWidth > 720'>
+      <source media="all and (min-width: 651px)" src="http://res.cloudinary.com/db3k25xjz/video/upload/v1518374592/eaude_web_video_sb36xg.mp4" type="video/mp4">
     </video>
-    <progressive-background v-else-if="windowWidth < 650"  class='background-img' :src="require('~/assets/img/eaude_landing_fallback.jpeg')" /> 
+    <background-image class='background-image' :imageUrl="require('~/assets/img/eaude_landing_fallback.jpeg')" />
     <nuxt-link class='logo-link' to='/about'>
       <logo />
     </nuxt-link>
@@ -12,10 +12,12 @@
 
 <script>
 import logo from '../components/logo.vue'
+import backgroundImage from '../components/backgroundImage.vue'
 
 export default {
   components: {
-    logo
+    logo,
+    backgroundImage
   },
   head () {
     return {
@@ -25,15 +27,15 @@ export default {
   data () {
     return {
       windowWidth: '',
-      height: ''
+      windowHeight: '100vh'
     }
   },
   beforeMount () {
     this.windowWidth = window.innerWidth
-    this.height = window.innerHeight
+    this.windowHeight = `${window.innerHeight}px`
     window.addEventListener('resize', () => {
       this.windowWidth = window.innerWidth
-      this.height = window.innerHeight
+      this.windowHeight = `${window.innerHeight}px`
     })
   },
   beforeDestroy () {
@@ -46,6 +48,7 @@ export default {
   .container {
     --height: 100vh;
     min-height: var(--height);
+    height: 100%;
     position: relative;
     display: flex;
     justify-content: center;
@@ -66,24 +69,27 @@ export default {
     width: 85%;
   }
 
-  @media (min-width: 720px) {
-    .logo-link {
-      width: 90%;
-    }
-  }
-
   .logo-link svg {
     height: 100%;
     width: 100%;
   }
 
-  .background-img {
+  .background-image {
     position: absolute;
     z-index: -1;
     left: 0;
     top: 0;
     bottom: 0;
     right: 0;
+  }
+
+  @media (min-width:720px) {
+    .logo-link {
+      width: 90%;
+    }
+    .background-image {
+      display: none;
+    }
   }
 
 </style>
