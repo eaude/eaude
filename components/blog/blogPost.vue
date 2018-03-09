@@ -95,6 +95,7 @@ export default {
 
   .item picture img {
     width: 100%;
+    display: block;
   }
 
   .is-safari {

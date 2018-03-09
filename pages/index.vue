@@ -1,9 +1,9 @@
 <template>
-  <section class="container">
+  <section class="container" :style="`--height: ${height}px`">
     <video v-if="windowWidth > 650" autoplay="" loop='' name="media">
        <source src="http://res.cloudinary.com/db3k25xjz/video/upload/v1518374592/eaude_web_video_sb36xg.mp4" type="video/mp4">
     </video>
-    <progressive-background v-else-if="windowWidth < 650" class='background-img' :src="require('~/assets/img/eaude_landing_fallback.jpeg')" /> 
+    <progressive-background v-else-if="windowWidth < 650"  class='background-img' :src="require('~/assets/img/eaude_landing_fallback.jpeg')" /> 
     <nuxt-link class='logo-link' to='/about'>
       <logo />
     </nuxt-link>
@@ -24,13 +24,16 @@ export default {
   },
   data () {
     return {
-      windowWidth: ''
+      windowWidth: '',
+      height: ''
     }
   },
   beforeMount () {
     this.windowWidth = window.innerWidth
+    this.height = window.innerHeight
     window.addEventListener('resize', () => {
       this.windowWidth = window.innerWidth
+      this.height = window.innerHeight
     })
   },
   beforeDestroy () {
@@ -41,7 +44,8 @@ export default {
 
 <style scoped>
   .container {
-    height: 100vh;
+    --height: 100vh;
+    min-height: var(--height);
     position: relative;
     display: flex;
     justify-content: center;

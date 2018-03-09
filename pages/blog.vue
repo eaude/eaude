@@ -112,6 +112,7 @@ export default {
     width: 100%;
     z-index: 1000;
     padding: 15px;
+    padding: 15px 15px 12px 15px;
     box-sizing: border-box;
   }
   

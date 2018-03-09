@@ -1,6 +1,6 @@
 <template>
   <div class="timer">
-    <p class='p1-xl p2-l p3-s'>{{ time | parseTimeString }}</p>
+    <p class='p1-xl p2-l p3-s'>{{ time | parseTime }}</p>
   </div>
 </template>
 
@@ -13,17 +13,16 @@ export default {
     }
   },
   filters: {
-    parseTimeString (input) {
-      return input.replace(/\//g, '.')
-        .replace(/AM|PM/g, '')
-        .split(',')
-        .map((time, i) => {
-          if (i < 1) {
-            const year = time.substring((time.length - 4), (time.length))
-            return (time[1] === '.' ? '0' : '') + time.replace(year, year.slice(2))
-          }
-          return time
-        }).join('')
+    parseTime (input) {
+      const split = input.split(',')
+      const timer = typeof split[1] !== 'undefined'
+        ? split[1].replace(/AM|PM/g, '')
+        : split[1]
+      const year = split[0]
+        .split('/')
+        .map((el) => el.length <= 1 ? '0' + el : el)
+        .join('.')
+      return year + timer
     }
   },
   created () {
