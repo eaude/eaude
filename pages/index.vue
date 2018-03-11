@@ -1,7 +1,7 @@
 <template>
   <section class="container" :style="`--height: ${windowHeight};`">
     <video autoplay="" loop='' name="media" v-show='windowWidth > 720'>
-      <source media="all and (min-width: 651px)" src="http://res.cloudinary.com/db3k25xjz/video/upload/v1518374592/eaude_web_video_sb36xg.mp4" type="video/mp4">
+      <source src="http://res.cloudinary.com/db3k25xjz/video/upload/v1518374592/eaude_web_video_sb36xg.mp4" type="video/mp4">
     </video>
     <background-image class='background-image' :imageUrl="require('~/assets/img/eaude_landing_fallback.jpeg')" />
     <nuxt-link class='logo-link' to='/about'>
