@@ -6,7 +6,8 @@
           <span>IRL</span>
         </span>
         <span>
-          <span>EAUDE.Studio</span>
+          <span>
+            <a href="mailto:info@eaude.co">EAUDE.Studio</a></span>
           <span class='mobile-address'>
             <span>195 Chrystie Street,</span>
             <span>Suite 303-0,</span>
