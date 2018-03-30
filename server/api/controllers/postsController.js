@@ -11,7 +11,7 @@ import { getTumblrPosts } from '../services/tumblr'
 
 export const getPosts = async (req, res, next) => {
   try {
-    const offset = req.query.offset || 0;
+    const offset = Number(req.query.offset) || 0;
     const postKeys = Array.from(Array(5))
       .map((x, i) => `post:${offset + i}`)
     const timeToLive = process.env.cache_ttl || 28800000

@@ -1,4 +1,5 @@
 const redis = require('redis')
+
 export const client = redis.createClient(6379, process.env.REDIS_HOST)
 
 client.on("error", function(err) {
