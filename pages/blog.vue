@@ -59,7 +59,11 @@ export default {
     loadMorePosts () {
       return axios.get(`/api/posts?offset=${this.posts.length}`)
         .then(({ data: { posts } }) => {
-          this.posts = [...this.posts, ...posts]
+          this.posts = [...this.posts, ...posts.filter((post) => {
+            if (post.originalPost) {
+              return true
+            }
+          })]
         })
         .catch((err) => {
           console.log(err)
