@@ -1,7 +1,7 @@
 <template>
   <div class='item' v-if='originalPost'>
     <template>
-      <background-image :imageUrl="altSize[3]" />
+      <background-image :class="{ 'is-safari': isSafari }" :imageUrl="altSize[3]" />
       <picture :style="`--span: ${span}; --start: ${isTall ? 5 : 4 };`">
         <source media="(min-width: 1440px)" :srcset="originalPost.url">
         <source media="(min-width: 650px)" :srcset="altSize[0]">
@@ -103,6 +103,8 @@ export default {
 
   .is-safari {
     transform: translate3d(0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000;
     will-change: transform;
     will-change: filter;
   }
