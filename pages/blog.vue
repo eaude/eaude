@@ -56,14 +56,20 @@ export default {
         threshold: [0.5, 1.0]
       })
     },
+    removeDuplicates (posts) {
+      return Array.from(new Set(posts))
+    },
     loadMorePosts () {
       return axios.get(`/api/posts?offset=${this.posts.length}`)
         .then(({ data: { posts } }) => {
-          this.posts = [...this.posts, ...posts.filter((post) => {
+          const newPosts = [...this.posts, ...posts.filter((post) => {
+            // why do we do this?
             if (post.originalPost) {
               return true
             }
           })]
+
+          this.posts = this.removeDuplicates(newPosts)
         })
         .catch((err) => {
           console.log(err)

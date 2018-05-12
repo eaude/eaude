@@ -25,11 +25,13 @@ export const flushCache = () => {
   })
 }
 
-export const checkPostCache = (postKeys) => {
+export const checkPostCache = (postKeys, cb) => {
   return new Promise((resolve, reject) => {
+    console.log(postKeys, 'postKeys')
     client.exists(...postKeys, (err, postCount) => {
       if (err) reject (err)
-      resolve(postCount === 5)
+      console.log(postCount, 'post Count');
+      resolve(cb(postCount))
     })
   })
 }
@@ -38,14 +40,23 @@ const mapPairs = (pairs) =>
   pairs.map(([originalPost, altPhotos]) => 
     ({ originalPost, altPhotos }))
 
-export const buildPostsFromCache = (postKeys) => {
-  const posts = postKeys.map((key) => {
+export const buildPostsFromCache = (keys) => {
+  const posts = keys.map((key) => {
     return Promise.all([
       getOriginalPostFromCache(key),
       getAltPhotosFromCache(key)
     ])
   })
   return Promise.all(posts).then(pairs => mapPairs(pairs))
+}
+
+export const getPostKeysFromCache = (offset) => {
+  return new Promise((resolve, reject) => {
+    client.zrevrange('posts', offset, (offset + 5), (err, data) => {
+      if (err) reject(err)
+      resolve(data)
+    })
+  })
 }
 
 export const getOriginalPostFromCache = (key) => {
@@ -80,9 +91,11 @@ export const hydratePostCache = (blog, offset) => {
       const photo = post.photos[0]
       const altSizes = photo.alt_sizes
       const current = offset+i
-      const postKey = `post:${current}`
       
-      client.hmset(postKey, {
+      // create a list of posts to reference
+      client.zadd('posts', 0, post.id);
+
+      client.hmset(post.id, {
         'caption': post.caption,
         'width': photo.original_size.width,
         'height': photo.original_size.height,
@@ -91,10 +104,9 @@ export const hydratePostCache = (blog, offset) => {
 
       Object.entries(altSizes)
         .forEach((entry) => {
-          client.zadd(`${postKey}:altPhotos`, entry[0],  entry[1].url)
+          client.zadd(`${post.id}:altPhotos`, entry[0],  entry[1].url)
         })  
 
-      client.zadd('posts', current, postKey)
       // TODO: set expirety date here to refresh the cache
       client.set('posts:count', blog.total_posts)
       client.set('posts:ttl', new Date().getTime())
