@@ -22,6 +22,10 @@ export const getPosts = async (req, res, next) => {
     ])
 
     getTumblrPosts(offset).then((blog) => {
+        if (count > blog.count) {
+          flushCache()
+        }
+
         if (count !== blog.count) {
           hydratePostCache(blog, offset)
         }
