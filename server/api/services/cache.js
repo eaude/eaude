@@ -27,10 +27,8 @@ export const flushCache = () => {
 
 export const checkPostCache = (postKeys, cb) => {
   return new Promise((resolve, reject) => {
-    console.log(postKeys, 'postKeys')
     client.exists(...postKeys, (err, postCount) => {
       if (err) reject (err)
-      console.log(postCount, 'post Count');
       resolve(cb(postCount))
     })
   })
@@ -52,7 +50,6 @@ export const buildPostsFromCache = (keys) => {
 
 export const getPostKeysFromCache = (offset) => {
   return new Promise((resolve, reject) => {
-    console.log('offset', offset)
     client.zrevrange('posts', offset, (offset + 4), (err, data) => {
       if (err) reject(err)
       resolve(data)
@@ -97,12 +94,6 @@ export const setPostMetaData = (count) => {
 export const hydratePostCache = (blog, offset) => { 
   return new Promise((resolve, reject) => {
     
-    const ids = blog.posts.map((post) => {
-      return { id: post.id };
-    })
-
-    console.log('ids', ids);
-
     blog.posts.forEach((post, i) => {
       const photo = post.photos[0]
       const altSizes = photo.alt_sizes
