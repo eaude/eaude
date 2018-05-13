@@ -5,10 +5,26 @@ import {
   getPostCountFromCache,
   shouldFlush,
   flushCache,
-  getPostKeysFromCache
+  getPostKeysFromCache,
+  setPostMetaData
 } from '../services/cache'
 
 import { getTumblrPosts } from '../services/tumblr'
+import { INSPECT_MAX_BYTES } from 'buffer';
+
+const recursivelyHyrdatePosts = (blog, cb, page = 1) => {
+  console.log('hydrating')
+  let maxPosts = 50
+  let canNextPage = blog.posts.length >= maxPosts * page
+  hydratePostCache(blog).then(() => {
+    if (canNextPage) {
+      const offset = maxPosts * (page - 1)
+      cb(offset).then((blog) => {
+        recursivelyHyrdatePosts(blog, cb, (page + 1))
+      })
+    }
+  })
+}
 
 export const getPosts = async (req, res, next) => {
   try {
@@ -21,15 +37,17 @@ export const getPosts = async (req, res, next) => {
       buildPostsFromCache(postKeys)
     ])
 
-    getTumblrPosts(offset).then((blog) => {
-        if (count > blog.count) {
-          flushCache()
+    // if the length is less then 5 then call the api to check if new posts
+    // this way the next posts won't load duplicates
+    if (posts.length < 5) {
+      getTumblrPosts(0).then((blog) => {
+        
+        if (Number(count) !== blog.total_posts || count > blog.total_posts) {
+          recursivelyHyrdatePosts(blog, getTumblrPosts)
         }
 
-        if (count !== blog.count) {
-          hydratePostCache(blog, offset)
-        }
-    })
+      })
+    }
 
     if (offset === 0 && await shouldFlush(timeToLive)) {
       await flushCache()

@@ -40,7 +40,8 @@ export default {
   data () {
     return {
       observer: '',
-      posts: []
+      posts: [],
+      count: 0
     }
   },
   methods: {
@@ -56,20 +57,18 @@ export default {
         threshold: [0.5, 1.0]
       })
     },
-    removeDuplicates (posts) {
-      return Array.from(new Set(posts))
-    },
     loadMorePosts () {
-      return axios.get(`/api/posts?offset=${this.posts.length}`)
-        .then(({ data: { posts } }) => {
+      const offset = this.posts.length - (this.posts.length % 5)
+      return axios.get(`/api/posts?offset=${offset}`)
+        .then(({data: { posts, count }}) => {
           const newPosts = [...this.posts, ...posts.filter((post) => {
             // why do we do this?
             if (post.originalPost) {
               return true
             }
           })]
-
-          this.posts = this.removeDuplicates(newPosts)
+          this.count = count
+          this.posts = newPosts
         })
         .catch((err) => {
           console.log(err)

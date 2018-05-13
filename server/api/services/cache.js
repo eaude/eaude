@@ -52,7 +52,8 @@ export const buildPostsFromCache = (keys) => {
 
 export const getPostKeysFromCache = (offset) => {
   return new Promise((resolve, reject) => {
-    client.zrevrange('posts', offset, (offset + 5), (err, data) => {
+    console.log('offset', offset)
+    client.zrevrange('posts', offset, (offset + 4), (err, data) => {
       if (err) reject(err)
       resolve(data)
     })
@@ -84,9 +85,24 @@ export const getPostCountFromCache = () =>
       resolve(data)
     })
   })
+ 
+export const setPostMetaData = (count) => {
+  new Promise((resolve, reject) => {
+    client.set('posts:count', count)
+    client.set('posts:ttl', new Date().getTime())
+    resolve(true)
+  })
+}
 
 export const hydratePostCache = (blog, offset) => { 
-  new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
+    
+    const ids = blog.posts.map((post) => {
+      return { id: post.id };
+    })
+
+    console.log('ids', ids);
+
     blog.posts.forEach((post, i) => {
       const photo = post.photos[0]
       const altSizes = photo.alt_sizes
@@ -106,11 +122,8 @@ export const hydratePostCache = (blog, offset) => {
         .forEach((entry) => {
           client.zadd(`${post.id}:altPhotos`, entry[0],  entry[1].url)
         })  
-
-      // TODO: set expirety date here to refresh the cache
-      client.set('posts:count', blog.total_posts)
-      client.set('posts:ttl', new Date().getTime())
     })
+    setPostMetaData(blog.total_posts)
     resolve(true)
   })
 }

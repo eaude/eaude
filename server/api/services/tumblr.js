@@ -7,7 +7,7 @@ const client = tumblr.createClient({
 
 export const getTumblrPosts = (offset = 0) => {
   return new Promise((resolve, reject) => {
-    client.blogPosts('eaude-studio.tumblr.com', {offset, limit: 5}, (err, data) => {
+    client.blogPosts('eaude-studio.tumblr.com', {offset, limit: 50}, (err, data) => {
       if (err) {
         console.log(err);
         reject(err)
