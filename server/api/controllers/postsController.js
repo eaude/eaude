@@ -41,11 +41,12 @@ export const getPosts = async (req, res, next) => {
     // this way the next posts won't load duplicates
     if (posts.length < 5) {
       getTumblrPosts(0).then((blog) => {
-        
-        if (Number(count) !== blog.total_posts || count > blog.total_posts) {
-          recursivelyHyrdatePosts(blog, getTumblrPosts)
+        // if photo has been added or delete then flush and rehydrate
+        if (Number(count) !== blog.total_posts || Number(count) > blog.total_posts) {          
+          flushCache().then(() => {
+            recursivelyHyrdatePosts(blog, getTumblrPosts)
+          })
         }
-
       })
     }
 
