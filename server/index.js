@@ -2,15 +2,17 @@ import express from 'express'
 import { Nuxt, Builder } from 'nuxt'
 
 import api from './api'
+import admin from './admin'
 
 const app = express()
+
 const host = process.env.HOST || '0.0.0.0'
 const port = process.env.PORT || 8080
 
 app.set('port', port)
 
-// Import API Routes
 app.use('/api', api)
+app.use('/admin', admin)
 
 // Import and Set Nuxt.js options
 let config = require('../nuxt.config.js')

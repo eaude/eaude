@@ -9,11 +9,29 @@ import {
   setPostMetaData
 } from '../services/cache'
 
-import { getTumblrPosts } from '../services/tumblr'
-import { INSPECT_MAX_BYTES } from 'buffer';
+import { getTumblrPosts } from '../services/tumblr';
+// import service for cloudinary
+
+export const createPost = () => {
+  // upload photo cloudinary
+    // create low quality version of photo to cloudinary.
+
+  // get database connection
+  // submit post data
+    // submit photo urls
+    // submit caption
+}
+
+export const deletePost = () => {
+
+}
+
+export const getPosts = () => {
+  // get database connection
+  // get post
+}
 
 const recursivelyHyrdatePosts = (blog, cb, page = 1) => {
-  console.log('hydrating')
   let maxPosts = 50
   let canNextPage = blog.posts.length >= maxPosts * page
   hydratePostCache(blog).then(() => {
@@ -26,36 +44,36 @@ const recursivelyHyrdatePosts = (blog, cb, page = 1) => {
   })
 }
 
-export const getPosts = async (req, res, next) => {
-  try {
-    const offset = Number(req.query.offset) || 0;
-    const timeToLive = process.env.cache_ttl || 28800000
-    const postKeys = await getPostKeysFromCache(offset);
+// export const getPosts = async (req, res, next) => {
+//   try {
+//     const offset = Number(req.query.offset) || 0;
+//     const timeToLive = process.env.cache_ttl || 28800000
+//     const postKeys = await getPostKeysFromCache(offset);
 
-    const [count, posts] = await Promise.all([
-      getPostCountFromCache(),
-      buildPostsFromCache(postKeys)
-    ])
+//     const [count, posts] = await Promise.all([
+//       getPostCountFromCache(),
+//       buildPostsFromCache(postKeys)
+//     ])
 
-    // if the length is less then 5 then call the api to check if new posts
-    // this way the next posts won't load duplicates
-    if (posts.length < 5) {
-      getTumblrPosts(0).then((blog) => {
-        // if photo has been added or delete then flush and rehydrate
-        if (Number(count) !== blog.total_posts || Number(count) > blog.total_posts) {          
-          flushCache().then(() => {
-            recursivelyHyrdatePosts(blog, getTumblrPosts)
-          })
-        }
-      })
-    }
+//     // if the length is less then 5 then call the api to check if new posts
+//     // this way the next posts won't load duplicates
+//     if (posts.length < 5) {
+//       getTumblrPosts(0).then((blog) => {
+//         // if photo has been added or delete then flush and rehydrate
+//         if (Number(count) !== blog.total_posts || Number(count) > blog.total_posts) {          
+//           flushCache().then(() => {
+//             recursivelyHyrdatePosts(blog, getTumblrPosts)
+//           })
+//         }
+//       })
+//     }
 
-    if (offset === 0 && await shouldFlush(timeToLive)) {
-      await flushCache()
-    }
+//     if (offset === 0 && await shouldFlush(timeToLive)) {
+//       await flushCache()
+//     }
 
-    res.json({count, posts})
-  } catch (err) {
-    console.error(err)
-  }
-}
+//     res.json({count, posts})
+//   } catch (err) {
+//     console.error(err)
+//   }
+// }
