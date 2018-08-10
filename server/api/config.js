@@ -8,5 +8,3 @@ module.exports = {
     IdentityPoolId: process.env['S3_IDENTITY_POOL_ID']
   }
 }
-
-

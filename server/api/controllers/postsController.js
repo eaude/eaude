@@ -1,25 +1,25 @@
-import { 
-  hydratePostCache, 
-  checkPostCache, 
-  buildPostsFromCache,
-  getPostCountFromCache,
-  shouldFlush,
-  flushCache,
-  getPostKeysFromCache,
-  setPostMetaData
-} from '../services/cache'
+// import {
+//   hydratePostCache,
+//   checkPostCache,
+//   buildPostsFromCache,
+//   getPostCountFromCache,
+//   shouldFlush,
+//   flushCache,
+//   getPostKeysFromCache,
+//   setPostMetaData
+// } from '../services/cache'
 
-import { getTumblrPosts } from '../services/tumblr';
+// import { getTumblrPosts } from '../services/tumblr'
 // import service for cloudinary
 
 export const createPost = () => {
   // upload photo cloudinary
-    // create low quality version of photo to cloudinary.
+  // create low quality version of photo to cloudinary.
 
   // get database connection
   // submit post data
-    // submit photo urls
-    // submit caption
+  // submit photo urls
+  // submit caption
 }
 
 export const deletePost = () => {
@@ -31,18 +31,18 @@ export const getPosts = () => {
   // get post
 }
 
-const recursivelyHyrdatePosts = (blog, cb, page = 1) => {
-  let maxPosts = 50
-  let canNextPage = blog.posts.length >= maxPosts * page
-  hydratePostCache(blog).then(() => {
-    if (canNextPage) {
-      const offset = maxPosts * (page - 1)
-      cb(offset).then((blog) => {
-        recursivelyHyrdatePosts(blog, cb, (page + 1))
-      })
-    }
-  })
-}
+// const recursivelyHyrdatePosts = (blog, cb, page = 1) => {
+//   let maxPosts = 50
+//   let canNextPage = blog.posts.length >= maxPosts * page
+//   hydratePostCache(blog).then(() => {
+//     if (canNextPage) {
+//       const offset = maxPosts * (page - 1)
+//       cb(offset).then((blog) => {
+//         recursivelyHyrdatePosts(blog, cb, (page + 1))
+//       })
+//     }
+//   })
+// }
 
 // export const getPosts = async (req, res, next) => {
 //   try {
@@ -60,7 +60,7 @@ const recursivelyHyrdatePosts = (blog, cb, page = 1) => {
 //     if (posts.length < 5) {
 //       getTumblrPosts(0).then((blog) => {
 //         // if photo has been added or delete then flush and rehydrate
-//         if (Number(count) !== blog.total_posts || Number(count) > blog.total_posts) {          
+//         if (Number(count) !== blog.total_posts || Number(count) > blog.total_posts) {
 //           flushCache().then(() => {
 //             recursivelyHyrdatePosts(blog, getTumblrPosts)
 //           })

@@ -1,8 +1,13 @@
 import { Router } from 'express'
-const router = Router()
 
 import { getPosts } from '../controllers/postsController'
+const router = Router()
 
-router.get('/posts', getPosts)
+router.get('/', getPosts)
+router.post('/create', () => {
+
+})
+
+// protected routes
 
 export default router

@@ -21,7 +21,7 @@ module.exports = {
   /*
   ** Add axios globally
   */
-  
+
   build: {
     vendor: ['axios'],
     extractCSS: true,
