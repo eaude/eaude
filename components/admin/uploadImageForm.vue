@@ -1,6 +1,6 @@
 <template>
   <form>
-    <slot :image='previewImage'/>
+    <slot :post='convertPost(previewImage)'/>
     <label enctype="multipart/form-data" for="caption">caption</label>
     <input type="text" name="caption">
     <label for='image'>image</label>
@@ -22,10 +22,27 @@ export default {
         const reader = new FileReader()
 
         reader.onload = (e) => {
-          this.previewImage = e.target.result
+          this.previewImage = {
+            url: e.target.result,
+            caption: '',
+            width: 100,
+            height: 100
+          }
         }
 
         reader.readAsDataURL(target.files[0])
+      }
+    },
+    convertPost (originalPost) {
+      console.log(originalPost)
+      return {
+        originalPost,
+        altPhotos: [
+          originalPost.url,
+          originalPost.url,
+          originalPost.url,
+          originalPost.url
+        ]
       }
     }
   }

@@ -1,25 +1,30 @@
 <template>
   <base-layout>
-    <div slot='main' class="about-wrapper">
-      <p class='p1-xl p2-l p3-s'> Create A New Post </p>
-      <upload-image-form onSubmit=''>
-        <template slot-scope='slotProps'>
-          <!-- Prview Slot -->
-          <img :src="slotProps.image" alt="">
-        </template>
-      </upload-image-form>
+    <div slot='main' class="about-wrapper continer">
+      <div class='create-post'>
+        <p class='p1-xl p2-l p3-s'> Create A New Post </p>
+        <upload-image-form onSubmit=''>
+          <template slot-scope='slotProps'>
+            <!-- Prview Slot -->
+            <blog-post v-if='slotProps.post.originalPost.url' int='1' :post="slotProps.post"/>
+            <p v-else> Please Upload Image :) </p>
+          </template>
+        </upload-image-form>
+      </div>
     </div>
   </base-layout>
 </template>
 
 <script>
 import baseLayout from '../components/layout/baseLayout.vue'
-import uploadImageForm from '../components/admin/uploadImageform.vue'
+import uploadImageForm from '../components/admin/uploadImageForm.vue'
+import blogPost from '../components/blog/blogPost.vue'
 
 export default {
   components: {
     baseLayout,
-    uploadImageForm
+    uploadImageForm,
+    blogPost
   },
   head () {
     return {
@@ -39,8 +44,23 @@ export default {
   .about-wrapper {
     display: flex;
     justify-content: center;
+    flex-flow: column;
     align-items: center;
     width: 100%;
+  }
+
+  .create-post {
+    width: 66%;
+  }
+
+  .about-wrapper .create-post p:first-child {
+    margin-bottom: auto;
+  }
+
+  .about-wrapper form {
+    margin-bottom: auto;
+    flex-flow: column;
+    display: flex;
   }
 
 </style>
