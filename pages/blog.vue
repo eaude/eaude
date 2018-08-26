@@ -58,17 +58,11 @@ export default {
       })
     },
     loadMorePosts () {
-      const offset = this.posts.length - (this.posts.length % 5)
-      return axios.get(`/api/posts?offset=${offset}`)
-        .then(({data: { posts, count }}) => {
-          const newPosts = [...this.posts, ...posts.filter((post) => {
-            // why do we do this?
-            if (post.originalPost) {
-              return true
-            }
-          })]
+      const page = this.posts.length / 10
+      return axios.get(`/api/posts?page=${page}`)
+        .then(({ data: { posts, count } }) => {
+          this.posts = [...this.posts, ...posts]
           this.count = count
-          this.posts = newPosts
         })
         .catch((err) => {
           console.log(err)

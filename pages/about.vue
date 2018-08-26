@@ -1,7 +1,7 @@
 <template>
   <base-layout>
     <aside-component slot='header'>
-      {{ about }}
+      {{ 'EAUDE is the studio of Art Directors Chris Glickman and Isaac Friedman-Heiman. The New York based office works with select clients in the fashion and cultural sectors creating campaigns, identities, environments, publications and websites.' }}
     </aside-component>
     <timer-component slot='main' v-if='windowWidth > 719'/>
     <footer-component slot='footer'/>
@@ -29,11 +29,6 @@ export default {
   head () {
     return {
       title: 'About Eaude'
-    }
-  },
-  computed: {
-    about () {
-      return 'EAUDE is the studio of Art Directors Chris Glickman and Isaac Friedman-Heiman. The New York based office works with select clients in the fashion and cultural sectors creating campaigns, identities, environments, publications and websites.'
     }
   },
   beforeMount () {

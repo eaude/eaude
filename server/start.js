@@ -2,6 +2,7 @@ import mongoose from 'mongoose'
 
 // import all of our models
 import './api/models/User'
+import './api/models/Post'
 
 import app from './app'
 

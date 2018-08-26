@@ -7,7 +7,6 @@ import api from './api/routes'
 import bodyParser from 'body-parser'
 import session from 'express-session'
 
-import cookieParser from 'cookie-parser'
 import passport from 'passport'
 
 import './api/services/passport'

@@ -1,15 +1,10 @@
-// var albumBucketName = 'BUCKET_NAME'
-// var bucketRegion = 'REGION'
-// var IdentityPoolId = 'IDENTITY_POOL_ID'
+import AWS from 'aws-sdk'
 
-// AWS.config.update({
-//   region: bucketRegion,
-//   credentials: new AWS.CognitoIdentityCredentials({
-//     IdentityPoolId: IdentityPoolId
-//   })
-// })
-
-// var s3 = new AWS.S3({
-//   apiVersion: '2006-03-01',
-//   params: {Bucket: albumBucketName}
-// })
+export const s3 = new AWS.S3({
+  credentials: {
+    accessKeyId: process.env.S3_ACCESS_KEY_ID,
+    secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
+  },
+  region: 'us-east-2',
+  signatureVersion: 'v4',
+})

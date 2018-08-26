@@ -1,15 +1,16 @@
 <template>
-  <div class='item' v-if='originalPost'>
+  <div class='item' v-if='post'>
     <template>
-      <background-image :class="{ 'is-safari': isSafari }" :imageUrl="altSize[3]" />
-      <picture :style="`--span: ${span}; --start: ${isTall ? 5 : 4 };`">
-        <source media="(min-width: 1440px)" :srcset="originalPost.url">
-        <source media="(min-width: 650px)" :srcset="altSize[0]">
-        <img :src="altSize[1]">
+      <background-image :class="{ 'is-safari': isSafari }" :imageUrl="imageSrc" />
+      <picture :style="`--span: ${isTall ? 4 : 6}; --start: ${isTall ? 5 : 4 };`">
+        <!-- TODO: MUST BUILD IMAGE QUALITY LAMDA -->
+        <!-- <source media="(min-width: 1440px)" :srcset="originalPost.url">
+        <source media="(min-width: 650px)" :srcset="altSize[0]"> -->
+        <img :src="imageSrc">
       </picture>
     </template>
     <p class='caption'>
-      {{ caption }}
+      {{ post.caption }}
     </p>
   </div>
 </template>
@@ -28,20 +29,12 @@ export default {
     backgroundImage
   },
   computed: {
-    originalPost () {
-      return this.post.originalPost
-    },
-    caption () {
-      return this.originalPost.caption.replace(/<[^>]+>/g, '')
-    },
-    altSize () {
-      return this.post.altPhotos
+    imageSrc () {
+      const { bucketUrl, key } = this.post.image
+      return `${bucketUrl}${key}`
     },
     isTall () {
-      return Number(this.originalPost.height) > Number(this.originalPost.width)
-    },
-    span () {
-      return this.isTall ? 4 : 6
+      return Number(this.post.image.size.height) > Number(this.post.image.size.width)
     }
   },
   beforeMount () {

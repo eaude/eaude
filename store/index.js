@@ -43,14 +43,6 @@ const createStore = () => {
           .then(() => {
             commit('SET_USER', null)
           })
-      },
-      uploadImage ({ commit }, formData) {
-        return axios.post('/api/post/create', {
-          formData,
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
-        })
       }
     }
   })

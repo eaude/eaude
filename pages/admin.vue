@@ -2,7 +2,7 @@
   <base-layout>
     <div slot='main' class="about-wrapper continer">
       <div class='create-post'>
-        <p class='p1-xl p2-l p3-s'> Create A New Post </p>
+        <h2 class='p1-xl p2-l p3-s'> Create A New Post </h2>
         <upload-image-form onSubmit=''>
           <template slot-scope='slotProps'>
             <!-- Prview Slot -->
@@ -50,7 +50,8 @@ export default {
   }
 
   .create-post {
-    width: 66%;
+    width: 100%;
+    max-width: 340px;
   }
 
   .about-wrapper .create-post p:first-child {
