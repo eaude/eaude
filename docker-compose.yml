@@ -1,8 +1,12 @@
-version: "3.3"
+version: "3.4"
 
 services:
   app:
-    build: ./
+    build: 
+      context: ./
+      target: develop
+    expose:
+      - "8080"
     command: npm run dev
     ports:
       - "8080:8080"
@@ -16,3 +20,13 @@ services:
     env_file:
       - .env
 
+  app-release:
+    expose:
+      - "8080"
+    build: 
+      context: ./
+      target: release
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
