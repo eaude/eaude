@@ -21,8 +21,6 @@ services:
       - .env
 
   app-release:
-    expose:
-      - "8080"
     build: 
       context: ./
       target: release

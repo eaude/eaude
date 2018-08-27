@@ -6,7 +6,7 @@
         <upload-image-form onSubmit=''>
           <template slot-scope='slotProps'>
             <!-- Prview Slot -->
-            <blog-post v-if='slotProps.post.originalPost.url' int='1' :post="slotProps.post"/>
+            <blog-post v-if='slotProps.post' int='1' :post="slotProps.post"/>
             <p v-else> Please Upload Image :) </p>
           </template>
         </upload-image-form>

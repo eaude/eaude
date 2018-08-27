@@ -1,7 +1,7 @@
 <template>
   <form enctype="multipart/form-data">
-    <slot v-if="loadedImage.originalPost.url" :post='loadedImage'/>
-    <b-field v-if='!loadedImage.originalPost.url'>
+    <slot v-if="loadedImage.image.bucketUrl" :post='loadedImage'/>
+    <b-field v-if='!loadedImage.image.bucketUrl'>
         <b-upload
             v-model='files'
             accept="image/*"
@@ -53,18 +53,15 @@ export default {
     // it is only necesary to preview the image before upload
     loadedImage () {
       return {
-        originalPost: {
-          url: this.previewImageUrl,
-          caption: this.caption,
-          width: this.width,
-          height: this.height
-        },
-        altPhotos: [
-          this.previewImageUrl,
-          this.previewImageUrl,
-          this.previewImageUrl,
-          this.previewImageUrl
-        ]
+        caption: this.caption,
+        image: {
+          bucketUrl: this.previewImageUrl,
+          key: '',
+          size: {
+            width: this.width,
+            height: this.height
+          }
+        }
       }
     }
   },

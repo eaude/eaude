@@ -1,5 +1,5 @@
 <template>
-  <div class='item' v-if='post'>
+  <div class='item' v-if='post.image'>
     <template>
       <background-image :class="{ 'is-safari': isSafari }" :imageUrl="imageSrc" />
       <picture :style="`--span: ${isTall ? 4 : 6}; --start: ${isTall ? 5 : 4 };`">
