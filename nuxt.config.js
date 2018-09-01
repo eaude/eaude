@@ -21,10 +21,14 @@ module.exports = {
   /*
   ** Add axios globally
   */
-  
   build: {
     vendor: ['axios'],
     extractCSS: true,
+    // postcss: {
+    //   plugins: {
+    //     'postcss-custom-properties': false
+    //   }
+    // },
     /*
     ** Run ESLINT on save
     */
@@ -38,5 +42,8 @@ module.exports = {
         })
       }
     }
-  }
+  },
+  modules: [
+    'nuxt-buefy'
+  ]
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="container" :style="`--height: ${height}px`">
+  <div class="eaude-container" :style="`--height: ${height}px`">
     <header>
       <nav-component slot='header'>
         <router-link class='p1-xl p2-l p3-s' to='/about'>About</router-link>
@@ -38,7 +38,7 @@ export default {
 </script>
 
 <style scoped>
-  .container {
+  .eaude-container {
     --height: 100vh;
     padding: 15px;
     width: 100%;

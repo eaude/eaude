@@ -16,4 +16,5 @@ build
 # Environment
 .env
 
-
+# coverage report
+coverage/
