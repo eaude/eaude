@@ -3,7 +3,7 @@ services:
   - docker
 
 before_install:
-  - docker build -t eaude/eaude:latest --target Test
+  - docker build -t eaude/eaude:latest --target test .
 
 script: 
-  - 
+  - docker run eaude/eaude:latest npm run test
