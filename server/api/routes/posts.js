@@ -1,8 +1,14 @@
 import { Router } from 'express'
+
+import { getPosts, createPost, getUploadUrl } from '../controllers/postsController'
 const router = Router()
 
-import { getPosts } from '../controllers/postsController'
+router.get('/', getPosts)
 
-router.get('/posts', getPosts)
+// Todo protect route
+router.get('/get-upload-url', getUploadUrl)
+router.post('/create', createPost)
+
+// protected routes
 
 export default router
