@@ -28,12 +28,9 @@
     "vue-style-loader": "^4.1.0"
   },
   "devDependencies": {
-    "url-loader": "^0.6.2",
-    "sass-loader": "^6.0.7",
     "babel-eslint": "^7.2.3",
     "babel-loader": "^7.1.4",
     "backpack-core": "^0.7.0",
-    "svg-sprite-loader": "^3.7.3",
     "eslint": "^4.19.1",
     "eslint-config-standard": "^10.2.1",
     "eslint-loader": "^1.9.0",
@@ -42,7 +39,10 @@
     "eslint-plugin-node": "^5.1.1",
     "eslint-plugin-promise": "^3.7.0",
     "eslint-plugin-standard": "^3.1.0",
-    "node-sass": "^4.9.0",
+    "node-sass": "^4.9.3",
+    "sass-loader": "^6.0.7",
+    "svg-sprite-loader": "^3.7.3",
+    "url-loader": "^0.6.2",
     "vue-lazy-background-images": "^1.0.0"
   }
 }
